@@ -1,38 +1,100 @@
-.App {
+/* Set the container to occupy the entire screen */
+body,
+html {
+  background-image: url("/src/assets/images/wave-haikei.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* Use flexbox to center the container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+/* Set the table presentation div to take 100% of the screen width */
+.table-presentation {
+  width: 98vw;
+  height: 98vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style the "Toggle Theme" button for dark theme */
+.ag-theme-alpine-dark .table-presentation-button {
+  background-color: black;
+  color: #fff;
+  border-color: white; /* Set the border color to white for dark theme */
+}
+
+/* Style the "Toggle Theme" button for light theme */
+.ag-theme-alpine .table-presentation-button {
+  background-color: #fff;
+  color: #000;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: lavender;
+}
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: red;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  min-height: 25vh; /* Ensure the error container takes the full height of the screen */
+  min-width: 25vw; /* Ensure the error container takes the full width of the screen */
+}
+
+.error-container {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.table-presentation_menu {
+  background-color: lavender;
+  margin: 5px;
+  padding: 1rem;
+  display: inherit;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.table-presentation_menu_dropdown {
   display: flex;
-  flex-direction: column;
+  color: #fff;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  flex-direction: column;
 }

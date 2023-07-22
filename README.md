@@ -1,71 +1,63 @@
-# Getting Started with Create React App
+# Dokumentacija za DataDisplayGrid komponentu
+## Opis
+### DataDisplayGrid je komponenta koja prikazuje tablu sa podacima u stilizovanom okruženju koristeći Ag-Grid biblioteku. Ova komponenta omogućava sortiranje, filtriranje i paginaciju podataka.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Props
+### apiData (obavezno)
+### Tip: array
+### Opis: Podaci koji se prikazuju u tabeli. Očekuje se niz objekata gde svaki objekat predstavlja jedan red u tabeli.
+### handlePageSizeChange (obavezno)
+### Tip: function
+### Opis: Funkcija koja se poziva kada korisnik promeni broj rezultata po stranici. Ova funkcija služi za osvežavanje podataka pri promeni paginacije.
+### pageSize (obavezno)
+### Tip: number
+### Opis: Trenutni broj rezultata po stranici koji se koristi za paginaciju tabele.
 
-## Available Scripts
+#### DataDisplayContainer komponenta služi kao kontejner za prikazivanje tabele sa podacima. Koristi DataDisplayGrid komponentu za prikazivanje podataka, a DataDisplayGrid koristi Ag-Grid biblioteku za stilizovanje i rukovanje tabelom. DataDisplayContainer koristi useState i useEffect hook-ove za upravljanje stanjem učitavanja, greške i podataka. Ova komponenta može se prilagoditi zahtevima naseg projekta tako što će se implementirati logika za preuzimanje podataka iz API-ja na osnovu promenjenog broja rezultata po stranici. Takođe, DataDisplayGrid komponenta omogućava definisanje definicija kolona i formatiranje vrednosti za određene kolone pomoću funkcije formatDate iz Helpers.js fajla.
 
-In the project directory, you can run:
 
-### `npm start`
+# Dokumentacija za DataDisplayContainer komponentu
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### DataDisplayContainer je kontejner komponenta koja upravlja prikazivanjem podataka u zavisnosti od njihovog stanja. Ova komponenta koristi useFetchData hook za preuzimanje podataka iz API-ja i prikazuje tablu sa podacima koristeći DataDisplayGrid komponentu iz Presentational foldera. Takođe, može prikazati indikator učitavanja ili komponentu za prikaz greške ukoliko dođe do problema pri preuzimanju podataka.
 
-### `npm test`
+#### DataDisplayContainer komponenta koristi useFetchData hook kako bi preuzela podatke iz API-ja. Ovaj hook vraća data, loading i error vrednosti koje koristimo za upravljanje stanjem učitavanja i greške pri preuzimanju podataka. Ako su podaci još uvek u procesu učitavanja (loading), prikazuje se indikator učitavanja u obliku custom SyncLoader komponente. Ako dođe do greške pri preuzimanju podataka (error), prikazuje se komponenta za prikaz greške ErrorComponent sa prikazanim tekstom greške. U suprotnom, kada su podaci preuzeti uspešno, prikazuje se DataDisplayGrid komponenta koja koristi apiData prop da prikaže tablu sa podacima. Ova komponenta može se koristiti za prikazivanje raznih podataka u vašem projektu i lako se može prilagoditi dodavanjem dodatne logike za rukovanje podacima.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Dokumentacija za App komponentu
 
-### `npm run build`
+### App je glavna komponenta naše React aplikacije. Ova komponenta je odgovorna za renderovanje i prikazivanje ostalih komponenti u vašoj aplikaciji. U ovom slučaju, App komponenta prikazuje DataDisplayContainer komponentu koja upravlja prikazivanjem podataka u zavisnosti od njihovog stanja.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### App komponenta prikazuje DataDisplayContainer komponentu koja je zadužena za prikazivanje podataka u vašoj aplikaciji. Ovde možemo dodavati i kombinovati različite komponente kako biste izgradili kompleksne aplikacije sa više funkcionalnosti. Ova komponenta takođe uvozi CSS fajl "App.css" koji se koristi za stilizovanje komponente. Možete prilagoditi stilove u "App.css" fajlu kako bi naša aplikacija imala željeni izgled. App komponenta je ključna tačka vaše aplikacije i predstavlja glavni "ulaz" u naš React projekat.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Dokumentacija za API_URL konstantu
+###  API_URL je konstanta koja sadrži URL adresu za pristupanje Binance API-ju i preuzimanje podataka o trgovini (ticker) za poslednjih 24 sata. Ova URL adresa se koristi za izvršavanje HTTP zahteva kako bi se dobili podaci o trgovini za različite finansijske instrumente.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### API_URL konstanta sadrži URL adresu ka Binance API-ju koji pruža podatke o trgovini (ticker) za različite finansijske instrumente. Ova URL adresa se koristi u useFetchData kuku (hook) ili bilo kojoj drugoj komponenti koja treba da pristupi i preuzme podatke o trgovini sa Binance berze. Na primer, u useFetchData kuku, API_URL se koristi kao osnova za izvršavanje HTTP zahteva ka Binance API-ju kako bi se dobili traženi podaci.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Dokumentacija za ErrorComponent komponentu
+### ErrorComponent je React komponenta koja se koristi za prikazivanje poruke o grešci u slučaju problema sa preuzimanjem podataka. Ova komponenta prima jedan prop error, koji sadrži poruku o grešci koja treba da bude prikazana.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### ErrorComponent se koristi za prikazivanje poruke o grešci u komponentama koje se bave preuzimanjem podataka. Kada dođe do greške u procesu preuzimanja podataka, komponenta će prikazati poruku o grešci koja je prosleđena putem prop-a error. Očekuje se da će prop error biti string koji sadrži poruku o grešci koja će biti prikazana korisniku.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Dokumentacija za Helper funkcije
+### formatDate je funkcija koja se koristi za formatiranje datuma u formatu "dd/mm/gggg". Funkcija prima jedan argument dateStr, koji je string reprezentacija datuma koji želimo da formatiramo. Funkcija će pretvoriti ovaj string u numerički tajmstemp, a zatim generisati formatirani datum.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### columnDefs je funkcija koja se koristi za generisanje definicija kolona za Ag Grid tabelu na osnovu podataka iz apiData. Funkcija prima jedan argument apiData, koji je niz objekata sa podacima koji će biti prikazani u tabeli. Funkcija će na osnovu prvog elementa iz apiData generisati definicije kolona za Ag Grid tabelu.
 
-## Learn More
+### paginationNumberFormatter je funkcija koja se koristi za formatiranje teksta prikaza broja stranice u paginaciji u tabeli. Funkcija prima jedan argument params, koji je objekat sa informacijama o paginaciji. Funkcija će formatirati vrednost broja stranice i vratiti formatirani tekst.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Dokumentacija za useFetchData hook
+### useFetchData je custom React hook koji se koristi za preuzimanje podataka sa zadatog URL-a pomoću  AXIOS HTTP biblioteku za slanje HTTP GET zahteva. Hook vraća stanje podataka, stanje učitavanja i stanje greške kako bi ih komponente mogle koristiti za prikazivanje podataka, indikatora učitavanja ili prikazivanje grešaka u zavisnosti od stanja.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Parametri
+#### url (string): URL adresa sa koje želite preuzeti podatke.
 
-### Code Splitting
+#### Povratne vrednosti
+#### data (any): Podaci koji su preuzeti sa zadatog URL-a. Ova vrednost će biti null dok traje preuzimanje podataka, a nakon završetka će sadržati preuzete podatke.
+#### loading (boolean): Vrednost koja označava da li trenutno traje preuzimanje podataka. Biće true dok traje preuzimanje, a nakon završetka će biti postavljena na false.
+#### error (Error | null): Objekat greške koji sadrži detalje o grešci koja se može desiti tokom preuzimanja podataka. Biće null ako preuzimanje bude uspešno.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# bay42_zadatak
