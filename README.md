@@ -6,12 +6,6 @@
 ### apiData (obavezno)
 ### Tip: array
 ### Opis: Podaci koji se prikazuju u tabeli. Očekuje se niz objekata gde svaki objekat predstavlja jedan red u tabeli.
-### handlePageSizeChange (obavezno)
-### Tip: function
-### Opis: Funkcija koja se poziva kada korisnik promeni broj rezultata po stranici. Ova funkcija služi za osvežavanje podataka pri promeni paginacije.
-### pageSize (obavezno)
-### Tip: number
-### Opis: Trenutni broj rezultata po stranici koji se koristi za paginaciju tabele.
 
 #### DataDisplayContainer komponenta služi kao kontejner za prikazivanje tabele sa podacima. Koristi DataDisplayGrid komponentu za prikazivanje podataka, a DataDisplayGrid koristi Ag-Grid biblioteku za stilizovanje i rukovanje tabelom. DataDisplayContainer koristi useState i useEffect hook-ove za upravljanje stanjem učitavanja, greške i podataka. Ova komponenta može se prilagoditi zahtevima naseg projekta tako što će se implementirati logika za preuzimanje podataka iz API-ja na osnovu promenjenog broja rezultata po stranici. Takođe, DataDisplayGrid komponenta omogućava definisanje definicija kolona i formatiranje vrednosti za određene kolone pomoću funkcije formatDate iz Helpers.js fajla.
 
